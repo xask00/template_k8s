@@ -1,0 +1,84 @@
+# Detailed pod spec reference here :
+# https://github.com/kubernetes/kubernetes/blob/a1cc48bf59dd456dcc60f67d005143fa9f33fbcc/staging/src/k8s.io/api/core/v1/types.go#L2748
+kind: Pod
+apiVersion: v1
+metadata:
+  name: complex-pod
+spec:
+  # Pod Restart policy can be Always, OnFailure, Never
+  restartPolicy: Always
+  terminationGracePeriodSeconds: 30
+  #activeDeadlineSeconds: 1
+
+  # Service Account name
+  #serviceAccountName: 
+  automountServiceAccountToken: true
+  
+  hostNetwork: false
+  hostPID: false
+  # all container share process namespace, view & send signals
+  shareProcessNamespace: false
+  #securityContext
+
+  # array
+  #imagePullSecrets
+  
+  # 'ClusterFirstWithHostNet', 'ClusterFirst', 'Default' or 'None'.
+  dnsPolicy: ClusterFirst
+  # This makes the FQDN complex-pod.complex-subdomain.namespace.
+  hostname: complex-pod
+  subdomain: complex-subdomain
+  # entries for /etc/hosts file
+  hostAliases:
+  - ip: "127.0.0.1"
+    hostnames:
+    - "test1"
+    - "test2"
+
+  # if non empty pod will be scheduled at that node
+  #nodeName
+  nodeSelector:
+     beta.kubernetes.io/arch: amd64
+     #key2: value2
+  #affinity:
+  # nodeAffinity:
+  # requiredDuringSchedulingIgnoredDuringExecution:
+  # nodeSelectorTerms:
+  # - matchExpressions:
+        # - key: kubernetes.io/e2e-az-name
+        # operator: In
+        # values:
+        # - e2e-az1
+        # - e2e-az2
+  #tolerations
+  
+  # When using a custom scheduler, use that name
+  #schedulerName
+
+  #priorityClassName
+  #priority, int32
+  #dnsConfig
+
+  #readinessGates, array
+
+  #runtimeClassName
+  #enableServiceLinks
+
+  # Init containers execute before main containers are run,
+  # These containers are for e.g. used in elasticsearch to setup the correct sysctl before elasticsearch starts up.
+  initContainers:
+   - name: init-container-centos-1
+     image: centos:7
+     command: ["sh", "-c", "echo 'I am a init container #1, I execute in order before main containers'"]
+   - name: init-container-centos-2
+     image: centos:7
+     command: ["sh", "-c", "echo 'I am a init container #2, I execute in order before main containers'"]
+  containers:
+    # A pod may have multiple containers, each share the same network namespace,
+    # i.e all pods share the same localhost and the same pod id.
+    - name: simple-container-ubuntu
+      image: ubuntu:bionic
+      command: ["sh", "-c", "while true; do echo ping; sleep 10; done"]
+    - name: simple-container-centos
+      image: centos:7
+      command: ["sh", "-c", "while true; do echo ping; sleep 10; done"]

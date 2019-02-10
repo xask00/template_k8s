@@ -1,0 +1,9 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: simple-pod
+spec:
+  containers:
+    - name: simple-container
+      image: ubuntu:bionic
+      command: ["sh", "-c", "while true; do echo ping; sleep 10; done"]
