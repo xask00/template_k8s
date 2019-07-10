@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${webHookName}-svc
+  namespace: webhooks
+  labels:
+    app: ${webHookName}
+spec:
+  ports:
+    - port: 443
+      targetPort: 8081
+  selector:
+    app: ${webHookName}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${webHookName}-deployment
+  namespace: webhooks
+  labels:
+    app: ${webHookName}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${webHookName}
+  template:
+    metadata:
+      labels:
+        app: ${webHookName}
+    spec:
+      containers:
+        - name: ${webHookName}
+          image: ${webHookName}:v1
+          env:
+            - name: KEYSTORE_LOCATION
+              value: "/app/certs_test/keystore.pkcs12"
+          volumeMounts:
+            - name: certs
+              mountPath: /app/certs_test
+              readOnly: true
+      volumes:
+        - name: certs
+          secret:
+            secretName: ${webHookName}-certs

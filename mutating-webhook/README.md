@@ -1,3 +1,19 @@
+## How to use this
+### Onetime
+1. Create secrets 
+   kubectl -n <namespace> create secret generic $webHookName-certs --from-file=../keystore.pkcs12
+2. kubectl apply -f build/k8s/webHookConfig.yml
+3. get CA bundle : `kubectl config view --raw --minify --flatten -o jsonpath='{.clusters[].cluster.certificate-authority-data}'`
+
+### Developing
+1. write code
+2. `./gradlew clean distTar`
+3. Create and push docker image 
+   docker build . -t <tag>
+4. kubectl apply -f build/k8s/mutatingWebHookDeployment.yml
+
+
+## Details
 The mutating webhook received this object (admission review) from k8s
 
    https://godoc.org/k8s.io/api/admission/v1beta1#AdmissionReview
@@ -76,11 +92,18 @@ spec:
 EOF
 
 kubectl certificate approve my-svc.my-namespace
-kubectl certificate approve my-svc.my-namespace
 kubectl get csr my-svc.my-namespace  -o jsonpath='{.status.certificate}'
 
+cat server.key  server.crt > both
+
+openssl pkcs12 -export -in both -out keystore.pkcs12 -passout pass:changeit
+
 // creating java keystore
-keytool -importkeystore -deststorepass changeit -destkeypass changeit -destkeystore my-keystore.jks -srckeystore cert-and-key.p12 -srcstoretype PKCS12 -srcstorepass cert-and-key-password -alias 1
+keytool -importkeystore -deststorepass changeit -destkeypass changeit -destkeystore my-keystore.jks -srckeystore keystore.pkcs12 -srcstoretype PKCS12 -srcstorepass changeit -alias 1
+
+
+//create secret and use it in spark java
+
 
 ## References
 

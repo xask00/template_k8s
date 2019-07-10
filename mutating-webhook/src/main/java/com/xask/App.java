@@ -14,8 +14,8 @@ import java.lang.invoke.MethodHandles;
 import static spark.Spark.*;
 
 public class App {
-
-    final static Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+    static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+    final static String KEYSTORE_PASSWORD="changeit";
 
     public static void main(String[] args) {
 
@@ -24,12 +24,13 @@ public class App {
 
         // Configuring SSL for spark java
         // This is important since when k8s --calls--> mutating webhook it should have ssl signed by k8s CA
-        String keyStoreLocation = "deploy/keystore.jks";
-        String keyStorePassword = "password";
-        secure(keyStoreLocation, keyStorePassword, null, null);
+        String keyStoreLocation = System.getenv().getOrDefault("KEYSTORE_LOCATION","/app/certs/keystore.pkcs12");
 
-        port(8080);
+        secure(keyStoreLocation, KEYSTORE_PASSWORD, null, null);
+        port(8081);
+
         get("/mutate", "application/json", (req, res) -> {
+            log.info("GET: Recieved request for mutating "+req.body());
             //V1beta1Admission.AdmissionReview
             res.type("application/json");
             return  ImmutableMap.of("test", ImmutableList.of("1", "2", "3"));
@@ -37,6 +38,7 @@ public class App {
 
 
         post("/mutate", "application/json", (req, res) -> {
+            log.info("POST: Recieved request for mutating "+req.body());
             AdmissionReview admissionReview = gson.fromJson(req.body(), AdmissionReview.class);
             AdmissionRequest admissionRequest = admissionReview.getRequest();
             log.info("HTTP request body = "+req.body());

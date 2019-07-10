@@ -1,0 +1,23 @@
+2019-Jul-09 17:49:31 PM [main] INFO  com.xask.App - Starting App
+2019-Jul-09 17:49:31 PM [Thread-0] INFO  org.eclipse.jetty.util.log - Logging initialized @1786ms to org.eclipse.jetty.util.log.Slf4jLog
+2019-Jul-09 17:49:31 PM [Thread-0] INFO  spark.embeddedserver.jetty.EmbeddedJettyServer - == Spark has ignited ...
+2019-Jul-09 17:49:31 PM [Thread-0] INFO  spark.embeddedserver.jetty.EmbeddedJettyServer - >> Listening on 0.0.0.0:8081
+2019-Jul-09 17:49:31 PM [Thread-0] INFO  org.eclipse.jetty.server.Server - jetty-9.4.8.v20171121, build timestamp: 2017-11-22T02:57:37+05:30, git hash: 82b8fb23f757335bb3329d540ce37a2a2615f0a8
+2019-Jul-09 17:49:31 PM [Thread-0] INFO  org.eclipse.jetty.server.session - DefaultSessionIdManager workerName=node0
+2019-Jul-09 17:49:31 PM [Thread-0] INFO  org.eclipse.jetty.server.session - No SessionScavenger set, using defaults
+2019-Jul-09 17:49:31 PM [Thread-0] INFO  org.eclipse.jetty.server.session - Scavenging every 600000ms
+2019-Jul-09 17:49:31 PM [Thread-0] INFO  org.eclipse.jetty.util.ssl.SslContextFactory - x509=X509@29d64da9(1,h=[webhook, webhook.webhooks],w=[]) for SslContextFactory@2dc5cd1a[provider=null,keyStore=file:///home/xask/work/projects/template_k8s/mutating-webhook/out/production/resources/keystore.pkcs12,trustStore=null]
+2019-Jul-09 17:49:31 PM [Thread-0] INFO  org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@52af653c{SSL,[ssl, http/1.1]}{0.0.0.0:8081}
+2019-Jul-09 17:49:31 PM [Thread-0] INFO  org.eclipse.jetty.server.Server - Started @2249ms
+2019-Jul-09 21:37:58 PM [main] INFO  com.xask.App - Starting App
+2019-Jul-09 21:38:36 PM [main] INFO  com.xask.App - Starting App
+2019-Jul-09 21:38:36 PM [Thread-0] INFO  org.eclipse.jetty.util.log - Logging initialized @1214ms to org.eclipse.jetty.util.log.Slf4jLog
+2019-Jul-09 21:38:36 PM [Thread-0] INFO  spark.embeddedserver.jetty.EmbeddedJettyServer - == Spark has ignited ...
+2019-Jul-09 21:38:36 PM [Thread-0] INFO  spark.embeddedserver.jetty.EmbeddedJettyServer - >> Listening on 0.0.0.0:8081
+2019-Jul-09 21:38:36 PM [Thread-0] INFO  org.eclipse.jetty.server.Server - jetty-9.4.8.v20171121, build timestamp: 2017-11-22T02:57:37+05:30, git hash: 82b8fb23f757335bb3329d540ce37a2a2615f0a8
+2019-Jul-09 21:38:36 PM [Thread-0] INFO  org.eclipse.jetty.server.session - DefaultSessionIdManager workerName=node0
+2019-Jul-09 21:38:36 PM [Thread-0] INFO  org.eclipse.jetty.server.session - No SessionScavenger set, using defaults
+2019-Jul-09 21:38:36 PM [Thread-0] INFO  org.eclipse.jetty.server.session - Scavenging every 660000ms
+2019-Jul-09 21:38:36 PM [Thread-0] INFO  org.eclipse.jetty.util.ssl.SslContextFactory - x509=X509@5486e7e5(1,h=[webhook, webhook.webhooks],w=[]) for SslContextFactory@7885deda[provider=null,keyStore=file:///home/xask/work/projects/template_k8s/mutating-webhook/src/main/resources/keystore.pkcs12,trustStore=null]
+2019-Jul-09 21:38:36 PM [Thread-0] INFO  org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@5947fd8e{SSL,[ssl, http/1.1]}{0.0.0.0:8081}
+2019-Jul-09 21:38:36 PM [Thread-0] INFO  org.eclipse.jetty.server.Server - Started @1626ms
