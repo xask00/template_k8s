@@ -79,6 +79,11 @@ spec:
     - name: simple-container-ubuntu
       image: ubuntu:bionic
       command: ["sh", "-c", "while true; do echo ping; sleep 10; done"]
+      env:
+       - name: HTTP_PROXY
+         value: http://my-proxy:8080
+       - name: JAVA_HOME
+         value: /usr/my_java_home
     - name: simple-container-centos
       image: centos:7
       command: ["sh", "-c", "while true; do echo ping; sleep 10; done"]
